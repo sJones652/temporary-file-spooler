@@ -54,3 +54,10 @@ is one-way, and the object is a binary file end-to-end.
 Implements: `read`, `readline`, `readlines`, `write`, `seek`, `tell`,
 `truncate`, `flush`, `fileno`, `close`, `writable`, `readable`, `seekable`,
 `rolled`, `closed`, and the context-manager and iterator protocols.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
